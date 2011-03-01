@@ -1,0 +1,19 @@
+{
+	"wordsets":
+	{
+	},
+	"typeweight":
+	{
+		"default": 1
+	},
+	"sentences":
+	{
+		"test":
+		[
+			{"type":"word", "value":"t"},
+			{"type":"word", "value":"1", "optional":true},
+			{"type":"word", "value":"2"},
+			{"type":"word", "value":"3"}
+		]
+	}
+}

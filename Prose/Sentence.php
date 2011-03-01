@@ -65,11 +65,12 @@ class Prose_Sentence extends Prose_Component
 		// do some boundary checking on the input values
 		if ($i >= count($sentence) || $j >= count($this->items)
 			|| $i < 0 || $j < 0 || ($i == $j && $d > 1)) {
-			echo 'killed, mthfka<br />';
+			echo 'out of bounds, returning<br />';
 			return false;
 		}
 
-		// $i = matching sentence		$j = internal sentence
+		// $i = matching sentence
+		// $j = internal sentence
 		$maxsize = max(count($sentence), count($this->items));
 		array_pad($sentence, $maxsize, false);
 		$jsentence = $this->items;
@@ -80,6 +81,16 @@ class Prose_Sentence extends Prose_Component
 				$score++;
 			} else if ($d < 1) {
 				echo "diff detected at $i $j<br />";
+				
+				// check its not optional first so we can just skip over it
+				if (isset($sentence[$i]['optional']) && $sentence[$i]['optional']) {
+					// it's optional and not present, so try and skip over it
+					$score++;
+					$i++;
+					$j++;
+					continue;
+				}
+				
 				$choices = array();
 				// run diffs +/- various positions to test for added or removed items
 				for ($a = -1; $a < 2; $a+=2) {
@@ -154,9 +165,9 @@ class Prose_Sentence extends Prose_Component
 				$wordset = $this->wordsets[$value];
 				if (count($wordset['types']) > 0) {
 					$match = false;
-					$objtype = gettype($object);
+					$objtype = str_replace('English_Token_', '', get_class($object));
 					foreach ($wordset['types'] as $type) {
-						if (substr($objtype, 0, strlen(type)) == $type) {
+						if (substr($objtype, 0, strlen($type)) == $type) {
 							$match = true;
 							break;
 						}
@@ -179,6 +190,9 @@ class Prose_Sentence extends Prose_Component
 					}
 				}
 				return true;
+			case 'wordtype':
+				$objtype = str_replace('English_Token_', '', get_class($object));
+				return (substr($objtype, 0, strlen($type)) === $value);
 		}
 		return false;
 	}
