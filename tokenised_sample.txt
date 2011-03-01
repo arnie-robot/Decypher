@@ -1,0 +1,29 @@
+Labelling:
+	(The)? <object> (are|is) (called|named) (the)? <name>
+	
+Variables:
+	(The)? <object> is <value>
+	
+Create things:
+	Create a(n)? <object> called <name>
+	
+Set trajectory step count:
+	(The)? <trajectory name> (trajectory)? has <number> step(s)?
+	
+Set trajectory step:
+	((The)? (<ordinal>|last|penultimate|final|next) step is (to)?)? move to (<coordinate>|(<coordinate dimension>){1,})
+	
+Coordinate:
+	<number>, <number>, <number>
+	
+Coordinate dimension:
+	<dimension> position of (the)? <object name> (found in|from) <object reference>
+	
+Object reference:
+	<action name> action <decision name> decision
+	
+Decision definition count:
+	(The)? <action name> (action)? has <number> decision(s)?
+	
+Decision name definition:
+	(The)? <object> (are|is) called (the)? <name>

@@ -1,0 +1,61 @@
+You are called the arm.
+Targets are called objects.
+The coordinate space is x, y, z.
+The initial action is start.
+
+Create an action called start.
+
+The start trajectory has one step.
+The first step is move to 0, 0, 0.
+Enable trajectory verification.
+
+Start has one decision.
+The first decision is called testLit.
+
+Execute testLit after the first trajectory step.
+The arm can be in any position for testLit.
+There must be one object, at any position, with a certainty of 75 (threshold 25) for testLit.
+The success action for testLit is lightSelf with no delay.
+The failure action for testLit is start with no delay.
+
+Start's reset condition is action start, timeout -1, no delay.
+
+Create an action called lightSelf.
+
+The lightSelf trajectory has four steps.
+The first step is to move to the y position of the object found in start action testLit decision.
+The second step is to move to the x position of the object found in start action testLit decision.
+The third step is to move to the z position of the object found in the start action testLit decision.
+The final step is to move x and z positions to zero.
+Trajectory verification is enabled.
+
+lightSelf has one decision.
+This is called testLit.
+The arm's x position must be 0 (threshold 10) for testLit.
+The arm's y position must be the position of the object found in start action testLit decision y posision (threshold 10) for testLit.
+The arm's z position must be 0 (threshold 10) for testLit.
+There must be one object, at x position 0 (threshold 10), y position equal to the object found in start action testLit decision y position (threshold 10, z position 0 (threshold 10), with a certainty of 75 (threshold 25) for testLit.
+The success action for testLit is lightOther with no delay.
+The failure action for testLit is lightSelf with no delay.
+
+lightSelf's reset condition is action start, timeout 3, no delay.
+
+Create an action called lightOther.
+
+The lightOther trajectory has four steps.
+The first step is to move to 0, 50, 0.
+The second step is to move to -50, 50, 0.
+The penultimate step is to move to -50, 50, 50.
+The final step is to move to 0, 50, 0.
+Enable trajectory verification.
+
+lightOther has one decision.
+The first decision is called testLit.
+The arm's x position must be 0 (threshold 10) for testLit.
+The arm's y position must be 50 (threshold 10) for testLit.
+The arm's z position must be 0 (threshold 10) for testLit.
+There must be one object, at position -50, 50, 50 (threshold 10), with certainty 75 (threshold 25) for testLit.
+The success action for testLit is start, no delay.
+The failure action for testLit is lightOther, no delay.
+
+lightOther's reset condition is action start, timeout 3, with no delay.
