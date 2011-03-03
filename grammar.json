@@ -41,7 +41,16 @@
 			{"type":"wordset", "value":"label_targetconnector"},
 			{"type":"wordset", "value":"label_targetverb"},
 			{"type":"word", "value":"the", "optional":true},
-			{"type":"wordtype", "value":"Noun"}
+			{"type":"wordtype", "value":"Noun"},
+			{"type":"wordtype", "value":"Punctuation"}
+		],
+		"variable":
+		[
+			{"type":"word", "value":"the", "optional":true},
+			{"type":"wordtype", "value":"Noun"},
+			{"type":"word", "value":"is"},
+			{"type":"wordtype", "value":"Noun"},
+			{"type":"wordtype", "value":"Punctuation"}
 		]
 	}
 }

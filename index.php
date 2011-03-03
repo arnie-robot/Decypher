@@ -28,7 +28,10 @@ if (isset($_POST['english'])) {
 				echo $word . ' - <em>' . get_class($word) . '</em><br />';
 			}
 			$matches = $sentence->matchGrammar($GLOBALS['grammar']);
-			print_r($matches);
+			echo '<br /><strong>Results</strong><br />';
+			foreach ($matches as $match) {
+				echo $match['name'] . ': <strong>' . $match['score'] . '</strong><br />';
+			}
 			echo '<br />';
 		}
 		echo '<br />';
