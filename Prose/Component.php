@@ -7,7 +7,7 @@
 /**
 * A base class for prose components
 */
-abstract class Prose_Component implements Iterator
+abstract class Prose_Component implements Iterator, Countable
 {
 	/**
 	* A list of items in this prose component
@@ -114,5 +114,13 @@ abstract class Prose_Component implements Iterator
 	public function valid()
 	{
 		return isset($this->items[$this->pos]);
+	}
+	
+	/**
+	* Countable::count
+	*/
+	public function count()
+	{
+		return count($this->items);
 	}
 }

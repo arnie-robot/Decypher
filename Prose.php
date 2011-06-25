@@ -29,4 +29,34 @@ class Prose extends Prose_Component
 			$this->items[] = new Prose_Paragraph($text);
 		}
 	}
+	
+	/**
+	* Matches the paragraphs in the prose against the defined grammar, and returns what it finds
+	*
+	* @param array $grammar		the grammar configuration
+	*
+	* @return array
+	*/
+	public function matchGrammar($grammar)
+	{
+		$result = array();
+		foreach ($this->items as $item) {
+			$result[] = $item->matchGrammar($grammar);
+		}
+		return $result;
+	}
+	
+	/**
+	* Gets the results that were matched in the grammar matching
+	*
+	* @return array
+	*/
+	public function getMatched()
+	{
+		$result = array();
+		foreach ($this->items as $item) {
+			$result[] = $item->getMatched();
+		}
+		return $result;
+	}
 }

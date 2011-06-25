@@ -15,6 +15,13 @@ class Prose_Sentence extends Prose_Component
 	* @var array
 	*/
 	protected $wordsets = array();
+	
+	/**
+	* Previously matched data from the grammar
+	*
+	* @var array
+	*/
+	protected $matched = null;
 
 	/**
 	* Splits the original content into tokens
@@ -49,7 +56,33 @@ class Prose_Sentence extends Prose_Component
 			}
 		}
 		usort($results, array($this, 'resultCompare'));
-		return $results;
+		$this->matched = $results;
+		return $this->getMatched();
+	}
+	
+	/**
+	* Gets the results that were matched in the grammar matching
+	*
+	* @return array
+	*/
+	public function getMatched()
+	{
+		return $this->matched;
+	}
+	
+	/**
+	* Gets a match sentence from the list of matches
+	*
+	* @param int $number which one to get
+	*
+	* @return array
+	*/
+	public function getMatch($number = 0)
+	{
+		if ($number > count($this->matched) || $number < 0) {
+			return false;
+		}
+		return $this->matched[$number];
 	}
 	
 	/**

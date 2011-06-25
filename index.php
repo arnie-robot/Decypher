@@ -18,10 +18,15 @@ if (isset($_POST['english'])) {
 	// grab the data
 	$english = $_POST['english'];
 	
-	$obj = new Prose($english);
+	$prose = new Prose($english);
+	$res = $prose->matchGrammar($GLOBALS['grammar']);
+	$processor = new Processor($prose);
+	$res = $processor->process();
+	print_r($res);
+	exit;
 	
 	// output it nicely
-	foreach ($obj as $p=>$paragraph) {
+	foreach ($prose as $p=>$paragraph) {
 		echo '<strong>Paragraph ' . $p . '</strong><br />';
 		foreach ($paragraph as $s=>$sentence) {
 			foreach ($sentence as $w=>$word) {

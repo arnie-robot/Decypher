@@ -39,4 +39,35 @@ class Prose_Paragraph extends Prose_Component
 			}
 		}
 	}
+	
+	/**
+	* Matches the sentences in this paragraph against the defined grammar, and returns what it finds
+	*
+	* @param array $grammar		the grammar configuration
+	*
+	* @return array
+	*/
+	public function matchGrammar($grammar)
+	{
+		$result = array();
+		foreach ($this->items as $item) {
+			$result[] = $item->matchGrammar($grammar);
+		}
+		
+		return $result;
+	}
+	
+	/**
+	* Gets the results that were matched in the grammar matching
+	*
+	* @return array
+	*/
+	public function getMatched()
+	{
+		$result = array();
+		foreach ($this->items as $item) {
+			$result[] = array('sentence'=>$item, 'grammar'=>$item->getMatched());
+		}
+		return $result;
+	}
 }
